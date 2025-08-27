@@ -1,51 +1,21 @@
 {
   "version": "1.0",
   "outputSchemas": {
-    "Schema_resumeChecker_v1": {
+    "Schema_rljfne": {
       "type": "object",
       "properties": {
         "result": {
           "type": "object",
           "properties": {
-            "overall_score": {
-              "type": "integer",
-              "description": "Overall resume score out of 100"
+            "score": {
+              "type": "string"
             },
-            "score_breakdown": {
-              "type": "object",
-              "properties": {
-                "formatting_ats_readiness": { "type": "integer" },
-                "content_relevance_clarity": { "type": "integer" },
-                "completeness": { "type": "integer" },
-                "grammar_spelling": { "type": "integer" }
-              },
-              "required": [
-                "formatting_ats_readiness",
-                "content_relevance_clarity",
-                "completeness",
-                "grammar_spelling"
-              ]
-            },
-            "strengths": {
-              "type": "array",
-              "items": { "type": "string" }
-            },
-            "areas_for_improvement": {
-              "type": "array",
-              "items": { "type": "string" }
-            },
-            "top_3_improvements": {
-              "type": "array",
-              "items": { "type": "string" }
+            "feedback": {
+              "type": "string"
             }
           },
-          "required": [
-            "overall_score",
-            "score_breakdown",
-            "strengths",
-            "areas_for_improvement",
-            "top_3_improvements"
-          ]
+          "required": ["score", "feedback"],
+          "additionalProperties": false
         }
       },
       "required": ["result"]
@@ -53,11 +23,11 @@
   },
   "mcpServers": {},
   "agents": {
-    "agent_0fvt16": {
-      "id": "agent_0fvt16",
+    "agent_z0tvhx": {
+      "id": "agent_z0tvhx",
       "name": "Resume Checker",
-      "instructions": "Input Handling\n\nAccept resumes in PDF or DOCX format.\n\nExtract text safely from the document, preserving sections such as Contact Info, Summary, Experience, Education, Skills, and Certifications.\n\nAnalysis Criteria\n\nCheck for ATS (Applicant Tracking System) compatibility:\n- Use of clear section headers.\n- Avoidance of images, tables, or unusual fonts.\n\nEvaluate structure & formatting:\n- Consistent font sizes, bullet points, and spacing.\n- Proper ordering (summary → experience → education → skills → certifications).\n\nAssess content quality:\n- Clarity and conciseness of descriptions.\n- Use of action verbs and quantified achievements.\n- Relevance of skills and keywords to target jobs.\n\nCheck completeness:\n- Contact information present.\n- Education and work history with dates.\n- At least one technical or soft skill listed.\n- Grammar & spelling errors.\n\nScoring System\n\nGenerate a score out of 100, broken down into:\n- Formatting & ATS readiness (30%).\n- Content relevance & clarity (40%).\n- Completeness of sections (20%).\n- Grammar & spelling (10%).\n\nFeedback & Suggestions\n\nProvide a list of strengths (what’s already good).\nProvide a list of weaknesses (what needs fixing).\nSuggest actionable improvements.\n\nOutput\n\nReturn structured JSON with:\n- Overall Score\n- Breakdown by category\n- Strengths\n- Areas for improvement\n- Top 3 improvements to prioritize",
-      "outputSchemaRef": "Schema_resumeChecker_v1",
+      "instructions": "Analyzes uploaded PDF resumes. Extracts the text, evaluates structure, clarity, keywords, formatting, and relevance to modern ATS systems. Returns a score between 1 and 100 along with a list of detailed improvement suggestions written in well formatted markdown.",
+      "outputSchemaRef": "Schema_rljfne",
       "modelSettings": {
         "store": false,
         "temperature": 0
@@ -71,7 +41,7 @@
       {
         "id": "s1",
         "type": "single_agent",
-        "agentRef": "agent_0fvt16",
+        "agentRef": "agent_z0tvhx",
         "io": {
           "carryHistory": true
         },
