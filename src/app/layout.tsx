@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
+import InterworkyWidget from '../components/InterworkyWidget';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
-import InterworkyWidget from '@/components/InterworkyWidget';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',

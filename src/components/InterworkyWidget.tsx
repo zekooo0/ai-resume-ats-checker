@@ -19,12 +19,9 @@ export default function InterworkyWidget() {
   const pathname = usePathname();
 
   useEffect(() => {
-    // Only load the script after the page has fully loaded to not block rendering
-    let timeoutId: NodeJS.Timeout;
-
     
       // Delay script loading to prioritize core content rendering
-      timeoutId = setTimeout(() => {
+      const timeoutId = setTimeout(() => {
         const script = document.createElement('script');
         script.src = SCRIPT_SRC;
         script.dataset.apiKey = API_KEY;
@@ -45,13 +42,13 @@ export default function InterworkyWidget() {
 
         document.body.appendChild(script); // Append to body instead of head for better performance
       }, 1500); // Delay loading until after critical content is rendered
-    
 
-    return () => {
-      if (timeoutId) clearTimeout(timeoutId);
-      window.Interworky?.remove?.();
-      document.querySelectorAll('script[data-api-key]').forEach(s => s.remove());
-    };
+      return () => {
+        clearTimeout(timeoutId);
+        window.Interworky?.remove?.();
+        document.querySelectorAll('script[data-api-key]').forEach(s => s.remove());
+      };
+    
   }, [pathname]);
 
   return null;
