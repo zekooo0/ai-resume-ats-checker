@@ -22,10 +22,8 @@ export default function InterworkyWidget() {
 
   useEffect(() => {
     // Only load the script after the page has fully loaded to not block rendering
-    let timeoutId: NodeJS.Timeout;
-
     // Delay script loading to prioritize core content rendering
-    timeoutId = setTimeout(() => {
+    const timeoutId = setTimeout(() => {
       const script = document.createElement('script');
       script.src = SCRIPT_SRC;
       script.dataset.apiKey = API_KEY;
