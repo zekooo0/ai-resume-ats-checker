@@ -1,8 +1,6 @@
 import type { Metadata } from 'next';
-import InterworkyWidget from '../components/InterworkyWidget';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
-import CarlaWidget from '@/components/CarlaWidget';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -29,9 +27,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <InterworkyWidget />
         {children}
-              <CarlaWidget />
       </body>
     </html>
   );
