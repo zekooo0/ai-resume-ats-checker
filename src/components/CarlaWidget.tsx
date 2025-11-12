@@ -20,7 +20,7 @@ export default function CarlaWidget() {
       script.async = true;
       script.defer = true;
 
-      script.onerror = (e: any) => {
+      script.onerror = (e) => {
         console.error('Carla Plugin failed to load', e);
       };
 
