@@ -31,8 +31,13 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
   const resultRef = useRef<HTMLDivElement>(null);
 
-  console.error('Rendering Home component');
-
+  const test = () => {
+    try {
+    } catch {
+      throw new Error('just an error');
+    }
+  };
+  test();
   const handleFileSelect = (selectedFile: File | null) => {
     setFile(selectedFile);
   };
