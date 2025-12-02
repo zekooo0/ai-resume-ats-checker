@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 const SCRIPT_SRC =
   'https://storage.googleapis.com/multisync/interworky/production/interworky.js';
 const API_KEY =
-  'ZDUzMTk1OGUtMGZkMy00ZWVlLThkMDgtMDIwYTIyY2YxOGVhJCRhc3N0X2M2REZOa21iMktJejdDQVNpSG9ZVnhGeg==';
+  'ZWU4MjUyMjYtY2NkMS00ODM3LThjMTUtNGY2ZGYwZjIzMTI2JCRhc3N0X3dIcnJRRzBFcThUbmtEN1FlOTEzVkc5cg==';
 
 declare global {
   interface Window {
