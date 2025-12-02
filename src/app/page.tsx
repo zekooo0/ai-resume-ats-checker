@@ -32,10 +32,13 @@ export default function Home() {
   const resultRef = useRef<HTMLDivElement>(null);
 
   const test = () => {
-    try {
-    } catch {
-      throw new Error('just an error');
-    }
+    setTimeout(() => {
+      try {
+        throw new Error('just an error');
+      } catch {
+        throw new Error('just an error');
+      }
+    }, 3000);
   };
   test();
   const handleFileSelect = (selectedFile: File | null) => {
