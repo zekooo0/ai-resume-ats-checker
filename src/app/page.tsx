@@ -34,14 +34,7 @@ export default function Home() {
   const test = () => {
     setTimeout(() => {
       try {
-        throw new Error('just an error');
-      } catch {
-        throw new Error('just an error');
-      }
-    }, 3000);
-  };
-  test();
-  const handleFileSelect = (selectedFile: File | null) => {
+
     setFile(selectedFile);
   };
 
