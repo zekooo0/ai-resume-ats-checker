@@ -3,13 +3,7 @@
 import Footer from '@/components/footer';
 import Header from '@/components/header';
 import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 
 import FileUpload from '@/components/ui/file-upload';
 import ScoreDisplay from '@/components/ui/score-display';
@@ -31,16 +25,6 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
   const resultRef = useRef<HTMLDivElement>(null);
 
-  const test = () => {
-    setTimeout(() => {
-      try {
-        throw new Error('just an error');
-      } catch {
-        throw new Error('just an error');
-      }
-    }, 3000);
-  };
-  test();
   const handleFileSelect = (selectedFile: File | null) => {
     setFile(selectedFile);
   };
@@ -99,40 +83,36 @@ export default function Home() {
   };
 
   return (
-    <div className='flex flex-col min-h-screen'>
+    <div className="flex flex-col min-h-screen">
       <Header />
-      <main className='flex-1'>
+      <main className="flex-1">
         {/* Section 1: Animated hero with centered upload */}
-        <section className='hero-animated relative py-16 md:py-24'>
-          <div className='grid-mask' aria-hidden='true' />
-          <div className='max-w-5xl mx-auto px-4'>
-            <div className='mx-auto text-center space-y-6'>
-              <h1 className='text-4xl md:text-6xl font-bold tracking-tight'>
+        <section className="hero-animated relative py-16 md:py-24">
+          <div className="grid-mask" aria-hidden="true" />
+          <div className="max-w-5xl mx-auto px-4">
+            <div className="mx-auto text-center space-y-6">
+              <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
                 AI‑powered ATS optimization in seconds
               </h1>
-              <p className='text-muted-foreground text-lg md:text-xl'>
-                Upload your PDF and let our AI analyze it to deliver an instant
-                ATS score and actionable recommendations.
+              <p className="text-muted-foreground text-lg md:text-xl">
+                Upload your PDF and let our AI analyze it to deliver an instant ATS score and
+                actionable recommendations.
               </p>
-              <div className='relative mx-auto w-full md:w-[680px]'>
-                <Card className='backdrop-blur supports-[backdrop-filter]:bg-background/60'>
+              <div className="relative mx-auto w-full md:w-[680px]">
+                <Card className="backdrop-blur supports-[backdrop-filter]:bg-background/60">
                   <CardHeader>
                     <CardTitle>Upload your resume</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className='space-y-2'>
+                    <div className="space-y-2">
                       <FileUpload onFileSelect={handleFileSelect} />
                     </div>
                   </CardContent>
                   <CardFooter>
-                    <Button
-                      className='w-full'
-                      onClick={handleAnalyze}
-                      disabled={!file || loading}
-                    >
+                    <Button className="w-full" onClick={handleAnalyze} disabled={!file || loading}>
                       {loading ? (
                         <>
-                          <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                           Analyzing...
                         </>
                       ) : (
@@ -142,8 +122,8 @@ export default function Home() {
                   </CardFooter>
                 </Card>
                 {loading && (
-                  <div className='absolute inset-0 z-10 rounded-xl bg-background/60 backdrop-blur-sm flex items-center justify-center'>
-                    <Loader2 className='mr-2 h-6 w-6 animate-spin' />
+                  <div className="absolute inset-0 z-10 rounded-xl bg-background/60 backdrop-blur-sm flex items-center justify-center">
+                    <Loader2 className="mr-2 h-6 w-6 animate-spin" />
                     Processing...
                   </div>
                 )}
@@ -153,27 +133,23 @@ export default function Home() {
         </section>
 
         {/* Section 2: Results */}
-        <section ref={resultRef} className='py-10 md:py-16'>
-          <div className='max-w-5xl mx-auto px-4'>
+        <section ref={resultRef} className="py-10 md:py-16">
+          <div className="max-w-5xl mx-auto px-4">
             <Card>
               <CardHeader>
                 <CardTitle>Analysis Result</CardTitle>
               </CardHeader>
               <CardContent>
-                {loading && (
-                  <p className='text-center'>Hold tight, running checks...</p>
-                )}
-                {error && <p className='text-center text-red-500'>{error}</p>}
+                {loading && <p className="text-center">Hold tight, running checks...</p>}
+                {error && <p className="text-center text-red-500">{error}</p>}
                 {apiResult && (
-                  <div className='space-y-6'>
+                  <div className="space-y-6">
                     <ScoreDisplay score={apiResult.score} />
                     {apiResult.fileId && (
-                      <p className='text-xs text-muted-foreground'>
-                        fileId: {apiResult.fileId}
-                      </p>
+                      <p className="text-xs text-muted-foreground">fileId: {apiResult.fileId}</p>
                     )}
                     <div>
-                      <h4 className='font-semibold text-lg'>Feedback</h4>
+                      <h4 className="font-semibold text-lg">Feedback</h4>
                       <ReactMarkdown remarkPlugins={[remarkGfm]}>
                         {apiResult.feedback}
                       </ReactMarkdown>
@@ -181,7 +157,7 @@ export default function Home() {
                   </div>
                 )}
                 {!loading && !apiResult && !error && (
-                  <p className='text-center text-muted-foreground'>
+                  <p className="text-center text-muted-foreground">
                     Your analysis will appear here.
                   </p>
                 )}
