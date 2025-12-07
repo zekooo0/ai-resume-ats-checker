@@ -3,10 +3,9 @@
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 
-const SCRIPT_SRC =
-  'https://storage.googleapis.com/multisync/interworky/production/interworky.js';
+const SCRIPT_SRC = 'http://localhost:8080/bundle.js';
 const API_KEY =
-  'ZWU4MjUyMjYtY2NkMS00ODM3LThjMTUtNGY2ZGYwZjIzMTI2JCRhc3N0X3dIcnJRRzBFcThUbmtEN1FlOTEzVkc5cg==';
+  'YTk1MjhkYTEtMDI3NS00NmE1LWEzMmUtNGI2NTFhOTViYmI4JCRhc3N0XzA4Y3FWSHhTdWVKSHk5emtLS1R3YkhsYQ==';
 
 declare global {
   interface Window {

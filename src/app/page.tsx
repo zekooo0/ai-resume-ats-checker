@@ -31,16 +31,6 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
   const resultRef = useRef<HTMLDivElement>(null);
 
-  const test = () => {
-    setTimeout(() => {
-      try {
-        throw new Error('just an error');
-      } catch {
-        throw new Error('just an error');
-      }
-    }, 3000);
-  };
-  test();
   const handleFileSelect = (selectedFile: File | null) => {
     setFile(selectedFile);
   };
