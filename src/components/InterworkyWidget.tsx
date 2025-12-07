@@ -1,10 +1,8 @@
 'use client';
 
 import { useEffect } from 'react';
-import { usePathname } from 'next/navigation';
 
-const SCRIPT_SRC =
-  'https://storage.googleapis.com/multisync/interworky/production/interworky.js';
+const SCRIPT_SRC = 'https://storage.googleapis.com/multisync/interworky/production/interworky.js';
 const API_KEY =
   'ZWU4MjUyMjYtY2NkMS00ODM3LThjMTUtNGY2ZGYwZjIzMTI2JCRhc3N0X3dIcnJRRzBFcThUbmtEN1FlOTEzVkc5cg==';
 
@@ -18,40 +16,47 @@ declare global {
 }
 
 export default function InterworkyWidget() {
-  const pathname = usePathname();
-
   useEffect(() => {
-    // Delay script loading to prioritize core content rendering
+    let removed = false;
+
+    // Avoid injecting duplicate scripts across re-renders or route transitions
+    const alreadyLoaded = document.querySelector(`script[src="${SCRIPT_SRC}"]`) !== null;
+
     const timeoutId = setTimeout(() => {
+      if (alreadyLoaded) {
+        // If script is already present, just ensure it's initialized
+        window.Interworky?.init?.();
+        return;
+      }
+
       const script = document.createElement('script');
       script.src = SCRIPT_SRC;
-      script.dataset.apiKey = API_KEY;
-      script.dataset.position = 'bottom-50 right-50';
+      (script as any).dataset.apiKey = API_KEY;
+      (script as any).dataset.position = 'bottom-50 right-50';
       script.async = true;
-      script.defer = true; // Add defer attribute
+      (script as any).defer = true;
 
       script.onload = () => {
-        // Initialize after a small delay to not interfere with main thread during initial render
         setTimeout(() => {
-          window.Interworky?.init?.();
+          if (!removed) {
+            window.Interworky?.init?.();
+          }
         }, 100);
       };
 
-      script.onerror = (e) => {
+      script.onerror = e => {
         console.error('Interworky Plugin failed to load', e);
       };
 
-      document.body.appendChild(script); // Append to body instead of head for better performance
-    }, 1500); // Delay loading until after critical content is rendered
+      document.body.appendChild(script);
+    }, 1500);
 
     return () => {
+      removed = true;
       clearTimeout(timeoutId);
       window.Interworky?.remove?.();
-      document
-        .querySelectorAll('script[data-api-key]')
-        .forEach((s) => s.remove());
     };
-  }, [pathname]);
+  }, []); // Run once on mount to prevent re-initialization loops
 
   return null;
 }
